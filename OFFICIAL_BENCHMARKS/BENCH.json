@@ -1,0 +1,421 @@
+{
+  "schema": "anticloud.tier-bench/1",
+  "project": "STABLE_DIFFUSION",
+  "source": {
+    "repo_path": "E:\\fenta\\Downloads\\The Anticloud\\ANTICLOUD_REPOS\\ARTIST_TOOLS\\STABLE_DIFFUSION\\UPSTREAM_CLONE",
+    "git": {
+      "head": "",
+      "url": "https://github.com/",
+      "branch": "master",
+      "committed_at": "2026-09-29T11:06:59+04:00"
+    }
+  },
+  "metrics": {
+    "files_total": 86,
+    "source_files_scanned": 50,
+    "lines_of_code": 12259,
+    "languages": {
+      ".swift": 34,
+      ".png": 28,
+      ".py": 17,
+      "(none)": 2,
+      ".md": 2,
+      ".txt": 2,
+      ".json": 1
+    }
+  },
+  "licence": {
+    "spdx": "MIT",
+    "class": "A",
+    "source_file": "LICENSE.md",
+    "redistribution_allowed": true
+  },
+  "dependencies": {
+    "count": 5,
+    "unique": 5,
+    "by_ecosystem": {
+      "pypi": 5
+    },
+    "list": [
+      {
+        "ecosystem": "pypi",
+        "name": "coremltools",
+        "version": ">=8.0",
+        "source_file": "setup.py",
+        "raw": "coremltools>=8.0"
+      },
+      {
+        "ecosystem": "pypi",
+        "name": "transformers",
+        "version": "==4.44.2",
+        "source_file": "setup.py",
+        "raw": "transformers==4.44.2"
+      },
+      {
+        "ecosystem": "pypi",
+        "name": "huggingface-hub",
+        "version": "==0.24.6",
+        "source_file": "setup.py",
+        "raw": "huggingface-hub==0.24.6"
+      },
+      {
+        "ecosystem": "pypi",
+        "name": "numpy",
+        "version": "<1.24",
+        "source_file": "setup.py",
+        "raw": "numpy<1.24"
+      },
+      {
+        "ecosystem": "pypi",
+        "name": "diffusionkit",
+        "version": "==0.4.0",
+        "source_file": "setup.py",
+        "raw": "diffusionkit==0.4.0"
+      }
+    ]
+  },
+  "owasp_top10": {
+    "total_findings": 19,
+    "files_with_findings": 17,
+    "severity": {
+      "high": 4,
+      "medium": 2,
+      "low": 13
+    },
+    "categories": {
+      "A01-BrokenAccessControl": {
+        "count": 0,
+        "findings": []
+      },
+      "A02-CryptographicFailures": {
+        "count": 2,
+        "findings": [
+          {
+            "severity": "medium",
+            "file": "swift/StableDiffusion/pipeline/NumPyRandomSource.swift",
+            "line": 26,
+            "cwe": "CWE-338",
+            "snippet": "///     - seed: Seed for underlying Mersenne Twister 19937 generator"
+          },
+          {
+            "severity": "medium",
+            "file": "swift/StableDiffusion/pipeline/TorchRandomSource.swift",
+            "line": 29,
+            "cwe": "CWE-338",
+            "snippet": "///     - seed: Seed for underlying Mersenne Twister 19937 generator"
+          }
+        ]
+      },
+      "A03-Injection": {
+        "count": 4,
+        "findings": [
+          {
+            "severity": "high",
+            "file": "tests/test_stable_diffusion.py",
+            "line": 197,
+            "cwe": "CWE-78",
+            "snippet": "os.system(cmd)"
+          },
+          {
+            "severity": "high",
+            "file": "python_coreml_stable_diffusion/activation_quantization.py",
+            "line": 192,
+            "cwe": "CWE-95",
+            "snippet": "prepared_model.eval()"
+          },
+          {
+            "severity": "high",
+            "file": "python_coreml_stable_diffusion/coreml_model.py",
+            "line": 80,
+            "cwe": "CWE-95",
+            "snippet": "\"shape\": tuple(eval(input_tensor['shape'])),"
+          },
+          {
+            "severity": "high",
+            "file": "python_coreml_stable_diffusion/torch2coreml.py",
+            "line": 429,
+            "cwe": "CWE-95",
+            "snippet": "reference_text_encoder = TextEncoder(with_hidden_states_for_layer=hidden_layer).eval()"
+          }
+        ]
+      },
+      "A04-InsecureDesign": {
+        "count": 11,
+        "findings": [
+          {
+            "severity": "low",
+            "file": "swift/StableDiffusion/pipeline/DiscreteFlowScheduler.swift",
+            "line": 90,
+            "cwe": "CWE-",
+            "snippet": "let stepIndex = timeSteps.firstIndex(of: t) ?? counter // TODO: allow float timesteps in scheduler step protocol"
+          },
+          {
+            "severity": "low",
+            "file": "swift/StableDiffusion/pipeline/Encoder.swift",
+            "line": 55,
+            "cwe": "CWE-",
+            "snippet": "// TODO: Consider auto resizing and croping similar to how Vision or CoreML auto-generated Swift code can accomplish with `MLFeatureValue`"
+          },
+          {
+            "severity": "low",
+            "file": "swift/StableDiffusion/pipeline/MultilingualTextEncoder.swift",
+            "line": 15,
+            "cwe": "CWE-",
+            "snippet": "// TODO: use maximum sequence length from embedding."
+          },
+          {
+            "severity": "low",
+            "file": "swift/StableDiffusion/pipeline/StableDiffusion3Pipeline.swift",
+            "line": 179,
+            "cwe": "CWE-",
+            "snippet": "timeStep: scheduler[i].timeSteps[step], // TODO: allow float timesteps in scheduler step protocol"
+          },
+          {
+            "severity": "low",
+            "file": "swift/StableDiffusion/pipeline/StableDiffusionXL+Resources.swift",
+            "line": 95,
+            "cwe": "CWE-",
+            "snippet": "// FIXME: Hardcoding to .cpuAndGPU since ANE doesn't support FLOAT32"
+          },
+          {
+            "severity": "low",
+            "file": "swift/StableDiffusion/pipeline/StableDiffusionXLPipeline.swift",
+            "line": 353,
+            "cwe": "CWE-",
+            "snippet": "// TODO: This checks if the time_ids input is looking for [12] or [2, 6]"
+          },
+          {
+            "severity": "low",
+            "file": "python_coreml_stable_diffusion/chunk_mlprogram.py",
+            "line": 235,
+            "cwe": "CWE-",
+            "snippet": "# TODO: Remove this method after setting the coremltools dependency >= 8.0"
+          },
+          {
+            "severity": "low",
+            "file": "python_coreml_stable_diffusion/coreml_model.py",
+            "line": 183,
+            "cwe": "CWE-",
+            "snippet": "# FixMe: Submodule names and compiled resources names differ. Can change if names match in the future."
+          },
+          {
+            "severity": "low",
+            "file": "python_coreml_stable_diffusion/multilingual_projection.py",
+            "line": 10,
+            "cwe": "CWE-",
+            "snippet": "# TODO: Read these values off of the NLContextualEmbedding API to enforce dimensions and track API versioning"
+          },
+          {
+            "severity": "low",
+            "file": "python_coreml_stable_diffusion/pipeline.py",
+            "line": 464,
+            "cwe": "CWE-",
+            "snippet": "# TODO: This checks if the time_ids input is looking for time_ids.shape == (12,) or (2, 6)"
+          },
+          {
+            "severity": "low",
+            "file": "python_coreml_stable_diffusion/torch2coreml.py",
+            "line": 483,
+            "cwe": "CWE-",
+            "snippet": "# TODO: maybe check pooled_outputs too"
+          }
+        ]
+      },
+      "A05-SecurityMisconfiguration": {
+        "count": 0,
+        "findings": []
+      },
+      "A06-VulnerableComponents": {
+        "count": 1,
+        "findings": [
+          {
+            "severity": "low",
+            "file": "setup.py",
+            "line": 18,
+            "cwe": "CWE-1104",
+            "snippet": "\"diffusers[torch]==0.30.2\","
+          }
+        ]
+      },
+      "A07-AuthFailures": {
+        "count": 0,
+        "findings": []
+      },
+      "A08-SoftwareDataIntegrity": {
+        "count": 1,
+        "findings": [
+          {
+            "severity": "low",
+            "file": "python_coreml_stable_diffusion/mixed_bit_compression_pre_analysis.py",
+            "line": 52,
+            "cwe": "CWE-319",
+            "snippet": "\"http://farm1.staticflickr.com/106/298138827_19bb723252_z.jpg\","
+          }
+        ]
+      },
+      "A09-LoggingMonitoringFailures": {
+        "count": 0,
+        "findings": []
+      },
+      "A10-SSRF": {
+        "count": 0,
+        "findings": []
+      }
+    }
+  },
+  "owasp_llm_top10": {
+    "total_findings": 4,
+    "files_with_findings": 4,
+    "severity": {
+      "high": 0,
+      "medium": 4,
+      "low": 0
+    },
+    "categories": {
+      "LLM01-PromptInjection": {
+        "count": 0,
+        "findings": []
+      },
+      "LLM02-SensitiveInfoDisclosure": {
+        "count": 0,
+        "findings": []
+      },
+      "LLM03-SupplyChain": {
+        "count": 4,
+        "findings": [
+          {
+            "severity": "medium",
+            "file": "tests/test_stable_diffusion.py",
+            "line": 55,
+            "cwe": "CWE-494",
+            "snippet": "cls.pytorch_pipe = StableDiffusionPipeline.from_pretrained("
+          },
+          {
+            "severity": "medium",
+            "file": "python_coreml_stable_diffusion/activation_quantization.py",
+            "line": 322,
+            "cwe": "CWE-494",
+            "snippet": "pipe = StableDiffusionPipeline.from_pretrained("
+          },
+          {
+            "severity": "medium",
+            "file": "python_coreml_stable_diffusion/pipeline.py",
+            "line": 732,
+            "cwe": "CWE-494",
+            "snippet": "pytorch_pipe = SDP.from_pretrained("
+          },
+          {
+            "severity": "medium",
+            "file": "python_coreml_stable_diffusion/torch2coreml.py",
+            "line": 1403,
+            "cwe": "CWE-494",
+            "snippet": "original_controlnet = ControlNetModel.from_pretrained("
+          }
+        ]
+      },
+      "LLM04-DataPoisoning": {
+        "count": 0,
+        "findings": []
+      },
+      "LLM05-ImproperOutputHandling": {
+        "count": 0,
+        "findings": []
+      },
+      "LLM06-ExcessiveAgency": {
+        "count": 0,
+        "findings": []
+      },
+      "LLM07-SystemPromptLeak": {
+        "count": 0,
+        "findings": []
+      },
+      "LLM08-VectorEmbeddingWeaknesses": {
+        "count": 0,
+        "findings": []
+      },
+      "LLM09-Misinformation": {
+        "count": 0,
+        "findings": []
+      },
+      "LLM10-UnboundedConsumption": {
+        "count": 0,
+        "findings": []
+      }
+    }
+  },
+  "sbom": {
+    "bomFormat": "CycloneDX",
+    "specVersion": "1.5",
+    "serialNumber": "urn:uuid:3d2e9030-635c-5c99-a520-ab93ba65be92",
+    "version": 1,
+    "metadata": {
+      "timestamp": "2026-10-06T07:43:30Z",
+      "component": {
+        "type": "application",
+        "name": "STABLE_DIFFUSION",
+        "version": "83b357604d34",
+        "bom-ref": "pkg:generic/anticloud/STABLE_DIFFUSION@83b357604d34",
+        "purl": "pkg:generic/anticloud/STABLE_DIFFUSION@83b357604d34",
+        "licenses": [
+          {
+            "license": {
+              "id": "MIT"
+            }
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "anticloud:source-commit",
+          "value": ""
+        },
+        {
+          "name": "anticloud:source-url",
+          "value": "https://github.com/"
+        },
+        {
+          "name": "anticloud:tier",
+          "value": "tier-agent"
+        }
+      ]
+    },
+    "components": [
+      {
+        "type": "library",
+        "name": "coremltools",
+        "version": ">=8.0",
+        "purl": "pkg:pypi/coremltools@8.0",
+        "bom-ref": "pypi/coremltools@>=8.0"
+      },
+      {
+        "type": "library",
+        "name": "transformers",
+        "version": "==4.44.2",
+        "purl": "pkg:pypi/transformers@4.44.2",
+        "bom-ref": "pypi/transformers@==4.44.2"
+      },
+      {
+        "type": "library",
+        "name": "huggingface-hub",
+        "version": "==0.24.6",
+        "purl": "pkg:pypi/huggingface-hub@0.24.6",
+        "bom-ref": "pypi/huggingface-hub@==0.24.6"
+      },
+      {
+        "type": "library",
+        "name": "numpy",
+        "version": "<1.24",
+        "purl": "pkg:pypi/numpy@1.24",
+        "bom-ref": "pypi/numpy@<1.24"
+      },
+      {
+        "type": "library",
+        "name": "diffusionkit",
+        "version": "==0.4.0",
+        "purl": "pkg:pypi/diffusionkit@0.4.0",
+        "bom-ref": "pypi/diffusionkit@==0.4.0"
+      }
+    ]
+  },
+  "elapsed_seconds": 2.94
+}

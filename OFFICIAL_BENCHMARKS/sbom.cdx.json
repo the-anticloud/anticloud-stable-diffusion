@@ -1,0 +1,74 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:3d2e9030-635c-5c99-a520-ab93ba65be92",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-10-06T07:43:30Z",
+    "component": {
+      "type": "application",
+      "name": "STABLE_DIFFUSION",
+      "version": "83b357604d34",
+      "bom-ref": "pkg:generic/anticloud/STABLE_DIFFUSION@83b357604d34",
+      "purl": "pkg:generic/anticloud/STABLE_DIFFUSION@83b357604d34",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    "properties": [
+      {
+        "name": "anticloud:source-commit",
+        "value": ""
+      },
+      {
+        "name": "anticloud:source-url",
+        "value": "https://github.com/"
+      },
+      {
+        "name": "anticloud:tier",
+        "value": "tier-agent"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "coremltools",
+      "version": ">=8.0",
+      "purl": "pkg:pypi/coremltools@8.0",
+      "bom-ref": "pypi/coremltools@>=8.0"
+    },
+    {
+      "type": "library",
+      "name": "transformers",
+      "version": "==4.44.2",
+      "purl": "pkg:pypi/transformers@4.44.2",
+      "bom-ref": "pypi/transformers@==4.44.2"
+    },
+    {
+      "type": "library",
+      "name": "huggingface-hub",
+      "version": "==0.24.6",
+      "purl": "pkg:pypi/huggingface-hub@0.24.6",
+      "bom-ref": "pypi/huggingface-hub@==0.24.6"
+    },
+    {
+      "type": "library",
+      "name": "numpy",
+      "version": "<1.24",
+      "purl": "pkg:pypi/numpy@1.24",
+      "bom-ref": "pypi/numpy@<1.24"
+    },
+    {
+      "type": "library",
+      "name": "diffusionkit",
+      "version": "==0.4.0",
+      "purl": "pkg:pypi/diffusionkit@0.4.0",
+      "bom-ref": "pypi/diffusionkit@==0.4.0"
+    }
+  ]
+}
